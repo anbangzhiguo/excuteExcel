@@ -28,7 +28,7 @@ public class UploadFile {
     public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest request, HttpServletResponse response) {
         if (!file.isEmpty()) {
             String saveFileName = file.getOriginalFilename();
-            File saveFile = new File("D:/Users/zhengwei.zhou/AppData/Local/Temp/aaa/upload/" + saveFileName);
+            File saveFile = new File("D:/aaa/upload/" + saveFileName);
             if (!saveFile.getParentFile().exists()) {
                 saveFile.getParentFile().mkdirs();
             }
@@ -38,16 +38,16 @@ public class UploadFile {
                 out.flush();
                 out.close();
 
-                File saveFile2 = new File("D:/Users/zhengwei.zhou/AppData/Local/Temp/aaa/upload/");
+                File saveFile2 = new File("D:/aaa/upload/");
                 for (File file2 : saveFile2.listFiles()) {
                     List<AddressExcel> addressExcels = importData(file2);
 
-                    File outfile = new File("D:/Users/zhengwei.zhou/AppData/Local/Temp/aaa/outload/");
+                    File outfile = new File("D:/aaa/outload/");
                     if (!outfile.exists()) {
                         outfile.mkdirs();
                     }
 
-                    exportAddressInfo(addressExcels, "D:/Users/zhengwei.zhou/AppData/Local/Temp/aaa/upload/sample.xlsx", outfile.getAbsolutePath() +File.separator+ file2.getName());
+                    exportAddressInfo(addressExcels, "D:/aaa/upload/sample.xlsx", outfile.getAbsolutePath() +File.separator+ file2.getName());
                 }
                 return "处理完成";
             } catch (FileNotFoundException e) {
